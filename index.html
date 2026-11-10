@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="gene2text beta: an exploratory graph for comparing transcriptomic datasets through metadata and gene-text representations.">
+  <title>gene2text | Scientist beta</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="masthead">
+    <a class="wordmark" href="#top" aria-label="gene2text home">
+      <span class="mark" aria-hidden="true">g2t</span>
+      <span>gene2text</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="#graph">Graph</a>
+      <a href="#method">Method</a>
+      <a href="#interpretation">Interpretation</a>
+      <a href="https://github.com/AG-RDM/gene2text-explorer/issues" rel="noreferrer">Feedback</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Scientist beta &middot; Research prototype</p>
+        <h1 id="page-title">Explore transcriptomic dataset relationships without hiding the evidence.</h1>
+        <p class="lede">
+          gene2text compares GEO datasets through metadata and compressed gene-expression text.
+          Every edge represents one text variant, with component-level evidence retained for inspection.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#graph">Open the graph</a>
+          <a class="button secondary" href="https://github.com/AG-RDM/gene2text-explorer" rel="noreferrer">View source</a>
+        </div>
+      </div>
+      <aside class="status-card" aria-label="Beta status">
+        <p class="status-label"><span></span> Beta status</p>
+        <dl>
+          <div><dt>Purpose</dt><dd>Dataset discovery</dd></div>
+          <div><dt>Scale</dt><dd>0.00&ndash;1.00</dd></div>
+          <div><dt>Aggregation</dt><dd>Arithmetic mean</dd></div>
+          <div><dt>Validation</dt><dd>Not yet established</dd></div>
+        </dl>
+        <p class="status-note">Do not use these scores as biological ground truth or clinical evidence.</p>
+      </aside>
+    </section>
+
+    <section class="graph-section" id="graph" aria-labelledby="graph-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Interactive workspace</p>
+          <h2 id="graph-title">Dataset similarity graph</h2>
+        </div>
+        <a class="text-link" href="graph.html">Open full screen &#8599;</a>
+      </div>
+      <p class="prototype-note">
+        This beta may initially show retained legacy scalar results. New runs expose five component scores and evidence separately for each gene-text variant.
+      </p>
+      <div class="graph-frame">
+        <iframe
+          src="graph.html"
+          title="Interactive gene2text dataset similarity graph"
+          loading="eager"
+        ></iframe>
+      </div>
+    </section>
+
+    <section class="method-section" id="method" aria-labelledby="method-title">
+      <div class="section-heading compact">
+        <div>
+          <p class="eyebrow">Transparent scoring</p>
+          <h2 id="method-title">One mean, five inspectable dimensions</h2>
+        </div>
+      </div>
+      <p class="section-intro">
+        DeepSeek V4 Pro scores each dimension in 0.05 increments. Python validates the response and computes the unweighted mean; the model does not choose the final score.
+      </p>
+      <ol class="dimensions">
+        <li><span>01</span><div><h3>Biological context</h3><p>Organism, tissue, disease, treatment and study objective.</p></div></li>
+        <li><span>02</span><div><h3>Cell-type composition</h3><p>Represented cell populations and their relative prominence.</p></div></li>
+        <li><span>03</span><div><h3>Cell-state similarity</h3><p>Activation, differentiation, inflammatory and metabolic states.</p></div></li>
+        <li><span>04</span><div><h3>Molecular programs</h3><p>Pathways, marker programs and expressed biological processes.</p></div></li>
+        <li><span>05</span><div><h3>Gene signatures</h3><p>Direct correspondence between the supplied gene-text summaries.</p></div></li>
+      </ol>
+    </section>
+
+    <section class="interpretation-section" id="interpretation" aria-labelledby="interpretation-title">
+      <div class="section-heading compact">
+        <div>
+          <p class="eyebrow">Read with care</p>
+          <h2 id="interpretation-title">What the score bands mean</h2>
+        </div>
+      </div>
+      <div class="scale" role="list" aria-label="Similarity score interpretation">
+        <div role="listitem"><strong>0.00&ndash;0.20</strong><span>Negligible or conflicting</span></div>
+        <div role="listitem"><strong>&gt;0.20&ndash;0.40</strong><span>Weak</span></div>
+        <div role="listitem"><strong>&gt;0.40&ndash;0.60</strong><span>Moderate</span></div>
+        <div role="listitem"><strong>&gt;0.60&ndash;0.80</strong><span>Strong</span></div>
+        <div role="listitem"><strong>&gt;0.80&ndash;1.00</strong><span>Very strong</span></div>
+      </div>
+      <div class="variant-grid">
+        <article><p class="tag">Variant A</p><h3>Naive top genes</h3><p>Abundant genes per cell. Direct, but sensitive to housekeeping-gene dominance.</p></article>
+        <article><p class="tag">Variant B</p><h3>Highly variable genes</h3><p>Per-cell genes restricted to variable features, emphasizing within-dataset variation.</p></article>
+        <article><p class="tag">Variant C</p><h3>Cluster markers</h3><p>Population-level marker programs. Usually the most interpretable representation.</p></article>
+      </div>
+      <p class="separation-note">Variant scores remain separate. They are never combined into a single cross-variant score.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>gene2text</strong> &middot; AG-RDM research prototype</p>
+    <p>Public GEO accessions and derived summaries only. No clinical interpretation.</p>
+  </footer>
+</body>
+</html>
