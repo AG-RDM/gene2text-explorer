@@ -9,6 +9,7 @@ on:
       - index.html
       - styles.css
       - graph.html
+      - README.md
   workflow_dispatch:
 
 permissions:
